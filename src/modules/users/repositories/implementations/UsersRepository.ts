@@ -1,5 +1,5 @@
 import { User } from "../../model/User";
-import { IUsersRepository, ICreateUserDTO } from "../IUsersRepository";
+import { ICreateUserDTO, IUsersRepository } from "../IUsersRepository";
 
 class UsersRepository implements IUsersRepository {
   private users: User[];
@@ -19,24 +19,56 @@ class UsersRepository implements IUsersRepository {
   }
 
   create({ name, email }: ICreateUserDTO): User {
-    // Complete aqui
+    const user = new User(name, email);
+    this.users.push(user);
+
+    return user;
   }
 
-  findById(id: string): User | undefined {
-    // Complete aqui
+  findById(id: string, isAdmin?: boolean): User | undefined {
+    const user = this.users.find((user) => user.id_user === id);
+
+    if (isAdmin && user && user.admin) {
+      return user;
+    }
+
+    return user;
   }
 
   findByEmail(email: string): User | undefined {
-    // Complete aqui
+    const userEmail = this.users.find((user) => user.email === email);
+    
+
+    return userEmail;
   }
 
   turnAdmin(receivedUser: User): User {
-    // Complete aqui
+    const userIndex = this.users.findIndex((user) => user.id_user === receivedUser.id_user);
+
+    if (userIndex === -1) {
+      throw new Error("Usuario não encontrado");
+    }
+
+    this.users[userIndex].admin = true;
+    this.users[userIndex].updated_at = new Date();
+
+    return this.users[userIndex];
   }
 
   list(): User[] {
-    // Complete aqui
+    return this.users;
+  }
+
+  listIsAdmin({ id_user }): User[] {
+    const user = this.findById(id_user, true);
+    
+    if (user) {
+      return this.users;
+    }
+
+    return [];
   }
 }
 
 export { UsersRepository };
+
