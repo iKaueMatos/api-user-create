@@ -12,7 +12,7 @@ Para executar o projeto em sua máquina local, siga os passos abaixo:
 ...
 
 ## 🛠️ Tecnologias Utilizadas
-<img src="https://img.shields.io/badge/-tecnologia%201-007ACC?style=flat-square&logo=php&logoColor=white" alt="php">
+<img src="https://img.shields.io/badge/-tecnologia%201-007ACC?style=flat-square&logo=typescript&logoColor=white" alt="php">
 
 ## 🤝 Contribuindo com o projeto
 Se você quiser contribuir com o projeto, siga os passos abaixo:
